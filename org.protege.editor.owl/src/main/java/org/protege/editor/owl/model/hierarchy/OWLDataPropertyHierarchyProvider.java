@@ -2,6 +2,7 @@ package org.protege.editor.owl.model.hierarchy;
 
 import org.semanticweb.owlapi.model.*;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -60,5 +61,10 @@ public class OWLDataPropertyHierarchyProvider extends AbstractOWLPropertyHierarc
 
     protected OWLDataProperty getRoot() {
         return getManager().getOWLDataFactory().getOWLTopDataProperty();
+    }
+
+
+    public Set<OWLDataProperty> getRelated(OWLDataProperty object) {
+        return Collections.emptySet();
     }
 }

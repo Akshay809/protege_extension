@@ -349,6 +349,11 @@ public class OWLEntitySelectorPanel extends JPanel {
         }
 
 
+        public Set<N> getRelated(N object) {
+            return current.getRelated(object);
+        }
+
+
         public Set<N> getDescendants(N object) {
             return current.getDescendants(object);
         }

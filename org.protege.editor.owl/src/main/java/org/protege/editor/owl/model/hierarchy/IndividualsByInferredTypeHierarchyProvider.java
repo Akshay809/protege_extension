@@ -80,6 +80,11 @@ public class IndividualsByInferredTypeHierarchyProvider extends AbstractOWLObjec
     }
 
 
+    public Set<OWLObject> getRelated(OWLObject object) {
+        return Collections.emptySet();
+    }
+
+
     public Set<OWLObject> getParents(OWLObject object) {
         if (reasoner != null && typeNodes.containsKey(object)) {
             return Collections.emptySet();

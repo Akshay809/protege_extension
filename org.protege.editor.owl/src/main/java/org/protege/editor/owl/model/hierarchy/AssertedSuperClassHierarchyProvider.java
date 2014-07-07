@@ -33,6 +33,11 @@ public class AssertedSuperClassHierarchyProvider extends AbstractSuperClassHiera
     }
 
 
+    public Set<OWLClass> getRelated(OWLClass object) {
+        return owlModelManager.getOWLHierarchyManager().getOWLClassHierarchyProvider().getRelated(object);
+    }
+
+
     public Set<OWLClass> getEquivalents(OWLClass object) {
         return Collections.emptySet();
     }

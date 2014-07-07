@@ -138,26 +138,21 @@ public class OWLAnnotationPropertyHierarchyProvider extends AbstractOWLObjectHie
     }
 
     public Set<OWLAnnotationProperty> getEquivalents(OWLAnnotationProperty object) {
+        return Collections.emptySet();
+    }
+
+
+    public Set<OWLAnnotationProperty> getRelated(OWLAnnotationProperty object) {
         getReadLock().lock();
         ontologySetReadLock.lock();
         try {
             Set<OWLAnnotationProperty> result = new HashSet<OWLAnnotationProperty>();
-            Set<OWLAnnotationProperty> ancestors = getAncestors(object);
-            if (ancestors.contains(object)) {
-                for (OWLAnnotationProperty anc : ancestors) {
-                    if (getAncestors(anc).contains(object)) {
-                        result.add(anc);
-                    }
-                }
-            }
-            result.remove(object);
             return result;
         }
         finally {
             ontologySetReadLock.unlock();
             getReadLock().unlock();
         }
-
     }
 
 

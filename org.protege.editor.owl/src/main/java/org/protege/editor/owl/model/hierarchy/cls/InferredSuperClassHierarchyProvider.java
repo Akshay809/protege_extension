@@ -70,6 +70,11 @@ public class InferredSuperClassHierarchyProvider extends AbstractSuperClassHiera
     }
 
 
+    public Set<OWLClass> getRelated(OWLClass object) {
+        return Collections.emptySet();
+    }
+
+
     public Set<OWLClass> getEquivalents(OWLClass object) {
         return Collections.emptySet();
     }

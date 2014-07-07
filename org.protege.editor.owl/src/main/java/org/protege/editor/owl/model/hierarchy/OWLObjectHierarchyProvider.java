@@ -39,6 +39,9 @@ public interface OWLObjectHierarchyProvider<N extends OWLObject> extends Disposa
     public Set<N> getChildren(N object);
 
 
+    public Set<N> getRelated(N object);
+
+
     public Set<N> getDescendants(N object);
 
 

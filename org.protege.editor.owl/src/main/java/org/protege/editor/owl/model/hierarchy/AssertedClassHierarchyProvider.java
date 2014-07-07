@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.*;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock.ReadLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock.WriteLock;
@@ -25,6 +26,8 @@ import org.semanticweb.owlapi.model.OWLOntologyChange;
 import org.semanticweb.owlapi.model.OWLOntologyChangeListener;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.semanticweb.owlapi.model.RemoveAxiom;
+import org.semanticweb.owlapi.model.OWLAnnotation;
+import org.semanticweb.owlapi.model.OWLObject;
 
 
 /**
@@ -66,9 +69,14 @@ public class AssertedClassHierarchyProvider extends AbstractOWLObjectHierarchyPr
 
     private Set<OWLClass> nodesToUpdate = new HashSet<OWLClass>();
 
+    public static Map<String, Map<String, String>> mapper;
+
+    private static String relation_namespace = "http://csis.pace.edu/semweb/relationship";    
+
 
     public AssertedClassHierarchyProvider(OWLOntologyManager owlOntologyManager) {
         super(owlOntologyManager);
+        this.mapper = new HashMap<String, Map<String, String>>();
         this.owlOntologyManager = owlOntologyManager;
         /*
          * It is not safe to set the collection of ontologies to a HashSet or TreeSet.  
@@ -268,6 +276,7 @@ public class AssertedClassHierarchyProvider extends AbstractOWLObjectHierarchyPr
     			}
     		}
 
+//            result.addAll(getRelated(object));
     		return result;
     	}
     	finally {
@@ -307,6 +316,73 @@ public class AssertedClassHierarchyProvider extends AbstractOWLObjectHierarchyPr
     	}
     }
 
+
+    public Set<OWLClass> getRelated(OWLClass object) {
+        getReadLock().lock();
+        ontologySetReadLock.lock();
+        try {
+            Set<OWLClass> related = new HashSet<OWLClass>();
+            for (OWLOntology ont : ontologies) {
+                OWLClass concept = object;
+                Set<OWLAnnotation> annotations = concept.getAnnotations(ont);
+                Iterator<OWLAnnotation> itr = annotations.iterator();
+                OWLAnnotation annotation;
+                Set<OWLClass> classes = ont.getClassesInSignature();
+                String delims = "[#]";
+                String relation_on = concept.getIRI().toString();
+                String relation_value, relation_property, connected_on, property_prefix;
+                while(itr.hasNext()) {
+                    annotation = (OWLAnnotation) itr.next();
+                    relation_value = annotation.getValue().toString();
+                        String[] value_tokens = relation_value.split(delims);
+                    relation_property = annotation.getProperty().toString();
+                        String[] property_tokens = relation_property.split(delims);
+                    connected_on = property_tokens[1];
+                        connected_on = connected_on.substring(0,connected_on.length()-1);
+                    property_prefix = property_tokens[0];
+                        property_prefix = property_prefix.substring(1,property_prefix.length());
+                        //Connecting...
+                        //(KEY1)  relation_on
+                        //(KEY2)  relation_value
+                        //(VALUE) connected_on
+                    if(value_tokens.length > 1 && property_prefix.compareTo(relation_namespace)==0) {
+                        Iterator<OWLClass> itr2 = classes.iterator();
+        //              IRI iri = concept.getIRI();
+        //              OWLClass tempClass = (OWLClass)ont.getEntitiesInSignature(iri.create(relation_value));
+                        while(itr2.hasNext()) {
+                            OWLClass tempClass = (OWLClass) itr2.next();
+                            String class_iri = tempClass.getIRI().toString();
+                            if(relation_value.compareTo(class_iri)==0) {
+                                related.add(tempClass);
+                                if(mapper.isEmpty()) {
+                                    Map<String, String> base_map = new HashMap<String, String>();
+                                    base_map.put(relation_value, connected_on);
+                                    mapper.put(relation_on,base_map);
+                                }
+                                else {
+                                    if(mapper.containsKey(relation_on)) {
+                                        Map<String, String> temp_map = mapper.get(relation_on);
+                                        temp_map.put(relation_value, connected_on);
+                                    }
+                                    else {
+                                        Map<String, String> temp_map = new HashMap<String, String>();
+                                        temp_map.put(relation_value, connected_on);
+                                        mapper.put(relation_on,temp_map);
+                                    }
+                                }
+                                break;
+                            }
+                        }
+                    }
+                }            
+            }
+            return related;
+        }
+        finally {
+            ontologySetReadLock.unlock();
+            getReadLock().unlock();
+        }
+    }
 
     public Set<OWLClass> getParents(OWLClass object) {
     	getReadLock().lock();

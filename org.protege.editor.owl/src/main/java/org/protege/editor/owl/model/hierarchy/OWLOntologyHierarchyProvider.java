@@ -159,6 +159,11 @@ public class OWLOntologyHierarchyProvider extends AbstractOWLObjectHierarchyProv
     }
 
 
+    public Set<OWLOntology> getRelated(OWLOntology object) {
+        return Collections.emptySet();
+    }
+
+
     public boolean containsReference(OWLOntology object) {
     	synchronized (roots) {
     		return parent2ChildMap.containsKey(object) ||

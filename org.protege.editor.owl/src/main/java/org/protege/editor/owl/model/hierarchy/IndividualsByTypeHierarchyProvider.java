@@ -94,6 +94,11 @@ public class IndividualsByTypeHierarchyProvider extends AbstractOWLObjectHierarc
     }
 
 
+    public Set<OWLObject> getRelated(OWLObject object) {
+        return Collections.emptySet();
+    }
+
+
     public Set<OWLObject> getParents(OWLObject object) {
         if (object instanceof OWLNamedIndividual) {
             OWLIndividual ind = (OWLNamedIndividual) object;

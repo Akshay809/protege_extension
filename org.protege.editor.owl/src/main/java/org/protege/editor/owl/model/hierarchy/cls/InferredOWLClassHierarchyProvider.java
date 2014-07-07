@@ -168,6 +168,11 @@ public class InferredOWLClassHierarchyProvider extends AbstractOWLObjectHierarch
     }
 
 
+    public Set<OWLClass> getRelated(OWLClass object) {
+        return Collections.emptySet();
+    }
+
+
     	public Set<OWLClass> getParents(OWLClass object) {
     		getReadLock().lock();
     		try {
