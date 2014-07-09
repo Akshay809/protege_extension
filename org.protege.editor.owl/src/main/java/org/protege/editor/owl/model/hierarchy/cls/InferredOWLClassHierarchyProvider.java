@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.Map;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -165,6 +166,11 @@ public class InferredOWLClassHierarchyProvider extends AbstractOWLObjectHierarch
     	finally {
     		getReadLock().unlock();
     	}
+    }
+
+
+    public Map<String, Map<String, String>> getMap() {
+        return Collections.emptyMap();
     }
 
 

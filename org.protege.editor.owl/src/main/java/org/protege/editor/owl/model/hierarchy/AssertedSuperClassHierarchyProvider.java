@@ -6,6 +6,7 @@ import org.semanticweb.owlapi.model.OWLOntology;
 
 import java.util.Collections;
 import java.util.Set;
+import java.util.Map;
 
 
 /**
@@ -35,6 +36,11 @@ public class AssertedSuperClassHierarchyProvider extends AbstractSuperClassHiera
 
     public Set<OWLClass> getRelated(OWLClass object) {
         return owlModelManager.getOWLHierarchyManager().getOWLClassHierarchyProvider().getRelated(object);
+    }
+
+
+    public Map<String, Map<String, String>> getMap() {
+        return Collections.emptyMap();
     }
 
 

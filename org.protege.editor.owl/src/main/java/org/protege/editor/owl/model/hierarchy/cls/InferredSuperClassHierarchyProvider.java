@@ -2,6 +2,7 @@ package org.protege.editor.owl.model.hierarchy.cls;
 
 import java.util.Collections;
 import java.util.Set;
+import java.util.Map;
 
 import org.protege.editor.owl.model.OWLModelManager;
 import org.protege.editor.owl.model.hierarchy.AbstractSuperClassHierarchyProvider;
@@ -74,6 +75,9 @@ public class InferredSuperClassHierarchyProvider extends AbstractSuperClassHiera
         return Collections.emptySet();
     }
 
+    public Map<String, Map<String, String>> getMap() {
+        return Collections.emptyMap();
+    }
 
     public Set<OWLClass> getEquivalents(OWLClass object) {
         return Collections.emptySet();

@@ -69,7 +69,7 @@ public class AssertedClassHierarchyProvider extends AbstractOWLObjectHierarchyPr
 
     private Set<OWLClass> nodesToUpdate = new HashSet<OWLClass>();
 
-    public static Map<String, Map<String, String>> mapper;
+    public Map<String, Map<String, String>> mapper;
 
     private static String relation_namespace = "http://csis.pace.edu/semweb/relationship";    
 
@@ -105,6 +105,9 @@ public class AssertedClassHierarchyProvider extends AbstractOWLObjectHierarchyPr
         getManager().addOntologyChangeListener(listener);
     }
 
+    public Map<String, Map<String, String>> getMap() {
+        return mapper;
+    }
 
     /**
      * Sets the ontologies that this hierarchy provider should use

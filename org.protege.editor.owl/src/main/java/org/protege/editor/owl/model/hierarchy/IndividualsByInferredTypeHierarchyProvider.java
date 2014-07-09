@@ -85,6 +85,11 @@ public class IndividualsByInferredTypeHierarchyProvider extends AbstractOWLObjec
     }
 
 
+    public Map<String, Map<String, String>> getMap() {
+        return Collections.emptyMap();
+    }
+
+
     public Set<OWLObject> getParents(OWLObject object) {
         if (reasoner != null && typeNodes.containsKey(object)) {
             return Collections.emptySet();

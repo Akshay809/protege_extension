@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.Map;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock.ReadLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock.WriteLock;
@@ -139,6 +140,11 @@ public class OWLAnnotationPropertyHierarchyProvider extends AbstractOWLObjectHie
 
     public Set<OWLAnnotationProperty> getEquivalents(OWLAnnotationProperty object) {
         return Collections.emptySet();
+    }
+
+
+    public Map<String, Map<String, String>> getMap() {
+        return Collections.emptyMap();
     }
 
 

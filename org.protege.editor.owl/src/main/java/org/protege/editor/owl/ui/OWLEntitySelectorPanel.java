@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.IdentityHashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.*;
 /*
  * Copyright (C) 2007, University of Manchester
  *
@@ -351,6 +352,11 @@ public class OWLEntitySelectorPanel extends JPanel {
 
         public Set<N> getRelated(N object) {
             return current.getRelated(object);
+        }
+
+
+        public Map<String, Map<String, String>> getMap() {
+            return Collections.emptyMap();
         }
 
 

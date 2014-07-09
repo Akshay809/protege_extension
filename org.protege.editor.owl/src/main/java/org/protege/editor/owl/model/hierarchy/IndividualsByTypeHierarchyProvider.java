@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.Map;
 
 
 /**
@@ -96,6 +97,11 @@ public class IndividualsByTypeHierarchyProvider extends AbstractOWLObjectHierarc
 
     public Set<OWLObject> getRelated(OWLObject object) {
         return Collections.emptySet();
+    }
+
+
+    public Map<String, Map<String, String>> getMap() {
+        return Collections.emptyMap();
     }
 
 

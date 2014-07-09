@@ -163,6 +163,9 @@ public class OWLOntologyHierarchyProvider extends AbstractOWLObjectHierarchyProv
         return Collections.emptySet();
     }
 
+    public Map<String, Map<String, String>> getMap() {
+        return Collections.emptyMap();
+    }
 
     public boolean containsReference(OWLOntology object) {
     	synchronized (roots) {

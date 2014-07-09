@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.Map;
 
 
 /**
@@ -66,5 +67,10 @@ public class OWLDataPropertyHierarchyProvider extends AbstractOWLPropertyHierarc
 
     public Set<OWLDataProperty> getRelated(OWLDataProperty object) {
         return Collections.emptySet();
+    }
+
+
+    public Map<String, Map<String, String>> getMap() {
+        return Collections.emptyMap();
     }
 }

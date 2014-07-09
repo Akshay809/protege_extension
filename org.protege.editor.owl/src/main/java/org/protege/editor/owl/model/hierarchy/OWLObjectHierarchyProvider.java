@@ -6,6 +6,7 @@ import org.semanticweb.owlapi.model.OWLOntology;
 
 import java.util.List;
 import java.util.Set;
+import java.util.Map;
 
 
 /**
@@ -34,6 +35,9 @@ public interface OWLObjectHierarchyProvider<N extends OWLObject> extends Disposa
      * Gets the objects that represent the roots of the hierarchy.
      */
     public Set<N> getRoots();
+
+
+    public Map<String, Map<String, String>> getMap();
 
 
     public Set<N> getChildren(N object);
